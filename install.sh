@@ -57,6 +57,13 @@ gzip psycopg2-2.6.tar.gz
 tar xf psycopg2-2.6.tar
 
 echo "+ ----------------------------------------------------------------- +"
+echo "Fetching Configurations + Setup Scripts"
+mkdir configs
+curl -o ./configs/pg_hba.conf https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/pg_hba.conf
+curl -o ./configs/postgresql.conf https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/postgresql.conf
+curl -o ./createrole.sql https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/createrole.sql
+
+echo "+ ----------------------------------------------------------------- +"
 echo "Installing Postgres 9.4.1"
 mkdir /Users/${USER}/postgres
 cd postgresql-9.4.1/
