@@ -93,7 +93,6 @@ echo "Starting Postgres"
 
 echo "Creating Database Role"
 export PGPASSWORD=hunter2
-/Users/${USER}/postgres/bin/pg_ctl start -D /Users/${USER}/postgres/db
 /Users/${USER}/postgres/bin/psql postgres -h 127.0.0.1 -p 3000 -U test -f ./configs/createrole.sql
 
 
