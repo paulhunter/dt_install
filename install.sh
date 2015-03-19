@@ -61,7 +61,7 @@ echo "Fetching Configurations + Setup Scripts"
 mkdir configs
 curl -o ./configs/pg_hba.conf https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/pg_hba.conf
 curl -o ./configs/postgresql.conf https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/postgresql.conf
-curl -o ./createrole.sql https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/createrole.sql
+curl -o ./configs/createrole.sql https://raw.githubusercontent.com/paulhunter/dt_install/master/configs/createrole.sql
 
 echo "+ ----------------------------------------------------------------- +"
 echo "Installing Postgres 9.4.1"
@@ -90,10 +90,11 @@ cd ../
 echo "+ ----------------------------------------------------------------- +"
 echo "Starting Postgres"
 /Users/${USER}/postgres/bin/pg_ctl start -D /Users/${USER}/postgres/db
+sleep 10 #give the server a second to start up.
 
 echo "Creating Database Role"
 export PGPASSWORD=hunter2
-/Users/${USER}/postgres/bin/psql postgres -h 127.0.0.1 -p 3000 -U test -f ./configs/createrole.sql
+/Users/${USER}/postgres/bin/psql postgres -p 3000 -f ./configs/createrole.sql
 
 
 echo "Cleaning up Desktop"
