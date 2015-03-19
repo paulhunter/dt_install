@@ -39,7 +39,7 @@ echo "+ ----------------------------------------------------------------- +"
 echo "Fetching Source Codes"
 mkdir /Users/${USER}/day_trading
 #Exec it so if it fails, we stop the script.
-exec git clone "https://$1@bitbucket.org/romilkhanna/day-trading.git" /Users/${USER}/day_trading
+git clone "https://$1@bitbucket.org/romilkhanna/day-trading.git" /Users/${USER}/day_trading
 # User will be prompted for password.
 
 cd /Users/${USER}/Desktop
