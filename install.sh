@@ -89,7 +89,7 @@ cd ../
 
 echo "+ ----------------------------------------------------------------- +"
 echo "Starting Postgres"
-/Users/${USER}/postgres/bin/pg_ctl start -D ../db
+/Users/${USER}/postgres/bin/pg_ctl start -D /Users/${USER}/postgres/db
 
 echo "Creating Database Role"
 export PGPASSWORD=hunter2
