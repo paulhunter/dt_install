@@ -48,12 +48,12 @@ cd dt_install
 echo "Fetching Postgres 9.4.1"
 curl -o postgresql-9.4.1.tar.gz https://ftp.postgresql.org/pub/source/v9.4.1/postgresql-9.4.1.tar.gz
 echo "Fetching Psycopg2"
-curl -o psycopg2 http://initd.org/psycopg/tarballs/PSYCOPG-2-6/psycopg2-2.6.tar.gz
+curl -o psycopg2-2.6.tar.gz http://initd.org/psycopg/tarballs/PSYCOPG-2-6/psycopg2-2.6.tar.gz
 
 echo "Unpacking Sources..."
-gzip postgresql-9.4.1.tar.gz
+gunzip postgresql-9.4.1.tar.gz
 tar xf postgresql-9.4.1.tar
-gzip psycopg2-2.6.tar.gz
+gunzip psycopg2-2.6.tar.gz
 tar xf psycopg2-2.6.tar
 
 echo "+ ----------------------------------------------------------------- +"
