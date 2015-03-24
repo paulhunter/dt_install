@@ -34,6 +34,7 @@ clear
 echo "Cleaning Past Install"
 rm -rf /Users/${USER}/postgres
 rm -rf /Users/${USER}/day_trading
+rm -rf /Users/${USER}/jdk
 
 echo "+ ----------------------------------------------------------------- +"
 echo "Fetching Source Codes"
@@ -42,6 +43,11 @@ mkdir /Users/${USER}/day_trading
 git clone "https://$1@bitbucket.org/romilkhanna/day-trading.git" /Users/${USER}/day_trading
 # User will be prompted for password.
 
+if[ ! -d "/Users/${USER}/day_trading" ]
+    echo "Bitbucket Authentication Failed, please try again"
+    exit
+fi
+
 cd /Users/${USER}/Desktop
 mkdir dt_install
 cd dt_install
@@ -49,6 +55,8 @@ echo "Fetching Postgres 9.4.1"
 curl -o postgresql-9.4.1.tar.gz https://ftp.postgresql.org/pub/source/v9.4.1/postgresql-9.4.1.tar.gz
 echo "Fetching Psycopg2"
 curl -o psycopg2-2.6.tar.gz http://initd.org/psycopg/tarballs/PSYCOPG-2-6/psycopg2-2.6.tar.gz
+echo "Fetching Java SDK 8"
+curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie"o jdk-8u40-macosx-x64.dmg http://download.oracle.com/otn-pub/java/jdk/8u40-b27/jdk-8u40-macosx-x64.dmg
 
 echo "Unpacking Sources..."
 gunzip postgresql-9.4.1.tar.gz
@@ -96,6 +104,25 @@ echo "+ ----------------------------------------------------------------- +"
 echo "Creating Database Role"
 export PGPASSWORD=hunter2
 /Users/${USER}/postgres/bin/psql postgres -p 3000 -f ./configs/createrole.sql
+
+echo "+ ----------------------------------------------------------------- +"
+echo "Installing Java SDK"
+echo "Mounting SDK"
+hdiutil attach ./jdk-8u40-macosx-x64.dmg
+pkgutil /Volumes/JDK\ 8\ Update\ 40/JDK\ 8\ Update\ 40.pkg ./up_jdk
+echo "Expanding Package"
+pkgutil --expand /Volumes/JDK\ 8\ Update\ 40/JDK\ 8\ Update\ 40.pkg ./up_jdk
+cd up_jdk
+cpio -i < ./jdk18040.pkg/Payload
+echo "Moving into place"
+mv ./Contents/Home /Users/$(USER}/jdk
+cd ../
+
+echo "+ ----------------------------------------------------------------- +"
+echo "Updating PATH for JDK"
+touch ~/.bash_profile
+echo "export PATH=\$PATH:/User/${USER}/jdk/bin" >> ~/.bash_profile
+source ~/.bash_profile
 
 echo "+ ----------------------------------------------------------------- +"
 echo "Cleaning up Desktop"
