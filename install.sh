@@ -43,7 +43,7 @@ mkdir /Users/${USER}/day_trading
 git clone "https://$1@bitbucket.org/romilkhanna/day-trading.git" /Users/${USER}/day_trading
 # User will be prompted for password.
 
-if[ ! -d "/Users/${USER}/day_trading" ]
+if [[ ! -d "/Users/${USER}/day_trading" ]] ; then 
     echo "Bitbucket Authentication Failed, please try again"
     exit
 fi
@@ -130,7 +130,9 @@ cd ~/Desktop
 rm -rf dt_install
 
 echo "+ ----------------------------------------------------------------- +"
-echo "Install Complete"
+echo "Installation Complete"
+echo "+ ----------------------------------------------------------------- +"
+
 
 
 
