@@ -120,7 +120,7 @@ cd ../
 echo "+ ----------------------------------------------------------------- +"
 echo "Updating PATH for JDK"
 touch ~/.bash_profile
-echo "export PATH=\$PATH:/Users/${USER}/jdk/bin:/Users/${USER}/postgres/bin" >> ~/.bash_profile
+echo "export PATH=/Users/${USER}/jdk/bin:/Users/${USER}/postgres/bin:\$PATH" >> ~/.bash_profile
 source ~/.bash_profile
 
 echo "+ ----------------------------------------------------------------- +"
